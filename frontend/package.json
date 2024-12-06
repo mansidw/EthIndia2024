@@ -1,0 +1,42 @@
+{
+  "name": "react-vite-modal-quick-start",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint"
+  },
+  "//IMP START": "IMP START - Web3Auth Installation",
+  "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@web3auth/base": "^8.12.2",
+    "@web3auth/ethereum-provider": "^8.12.3",
+    "@web3auth/metamask-adapter": "^8.12.4",
+    "@web3auth/modal": "^8.12.3",
+    "bootstrap": "^5.3.3",
+    "empty-module": "^0.0.2",
+    "ethers": "^6.13.2",
+    "react": "^18.3.1",
+    "react-bootstrap": "^2.10.4",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "react-toastify": "^10.0.5",
+    "viem": "^2.19.1",
+    "web3": "^4.11.1"
+  },
+  "//IMP END": "IMP END - Web3Auth Installation",
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "buffer": "^6.0.3",
+    "process": "^0.11.10",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0"
+  }
+}
