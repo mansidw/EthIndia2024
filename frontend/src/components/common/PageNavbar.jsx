@@ -15,9 +15,11 @@ import { Link } from "react-router-dom";
 import { DEFAULT_PROFILE, PAGE_LOGO, PAGE_TITLE } from "../../utils/constants";
 import { useAuth } from "../../context/AuthContext";
 
+import { LogInWithAnonAadhaar, useAnonAadhaar, AnonAadhaarProof, useProver } from "@anon-aadhaar/react";
+
 function PageNavbar() {
   const { login, logout, loggedIn, userInfo, publicAddress } = useAuth();
-  const navLinks = [{ title: "Profile", path: "/profile" }];
+  const navLinks = [{ title: "Profile", path: "/profile" }, { title: "tmpAnon", path: "/anon" }];
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <Container>
@@ -46,7 +48,11 @@ function PageNavbar() {
               ))}
           </Nav>
           <Nav>
+            <Nav.Item className="mx-2 mt-2">
+              <LogInWithAnonAadhaar nullifierSeed={1234} fieldsToReveal={["revealAgeAbove18", "revealPinCode", "revealGender", "revealState"]} />
+            </Nav.Item>
             <Nav.Item>
+
               {!loggedIn && (
                 <Button
                   variant="outline-primary"
