@@ -2,7 +2,7 @@ import os
 import chromadb
 from chromadb.config import Settings
 # from sentence_transformers import SentenceTransformer
-import chromadb.utils.embedding_functions as embedding_functions
+from chromadb.utils.embedding_functions import openai_embedding_function
 import numpy as np
 from dotenv import load_dotenv
 from sklearn.utils import murmurhash3_32
@@ -22,7 +22,7 @@ else:
 
 # Load Sentence Transformer Model
 # model = SentenceTransformer('all-MiniLM-L6-v2')
-model = embedding_functions.OpenAIEmbeddingFunction(
+model = openai_embedding_function.OpenAIEmbeddingFunction(
                 api_key=os.getenv("OPENAI_API_KEY"),
                 model_name="text-embedding-3-small"
             )
@@ -50,7 +50,8 @@ articles = [
 # Add articles to ChromaDB with LSH hashes
 for i, article in enumerate(articles):
     # Compute embedding
-    embeddings = model(article)  
+    embeddings = model(article)
+    print(type(embeddings))
     # Generate LSH hashes for the embeddings
     hashes = lsh_hash(embeddings)
 

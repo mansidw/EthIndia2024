@@ -3,7 +3,7 @@ import Home from "../components/home/Home";
 import Profile from "../components/profile/Profile";
 import Anon from "../components/signin/Anon";
 import SideBar from "../components/SideBar/SideBar";
-import Adddata from "../components/AddData/Adddata";
+import Adddata from "../components/AddData/AddData";
 import Verify from "../components/Verify/Verify";
 import "./Routes.css";
 
