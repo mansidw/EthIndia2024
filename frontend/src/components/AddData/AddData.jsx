@@ -38,6 +38,7 @@ const Adddata = () => {
             maxLine={2}
             minLine={1}
             url={webLink}
+            defaultMedia="defaul_article.jpg"
           />
         </div>
       )}
