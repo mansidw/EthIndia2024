@@ -88,7 +88,7 @@ export function AuthProvider({ children }) {
         setProvider(web3auth.provider);
         if (web3auth.connected) {
           setLoggedIn(true);
-          toast.success("Sup User!🙋‍♂️")
+          toast.success("Sup User!🙋‍♂️");
         }
       } catch (error) {
         console.error(error);
@@ -104,7 +104,6 @@ export function AuthProvider({ children }) {
       getBalance();
       getUserInfo();
     }
-
   }, [loggedIn]);
 
   const login = async () => {
@@ -117,7 +116,7 @@ export function AuthProvider({ children }) {
 
   const getUserInfo = async () => {
     const user = await web3auth.getUserInfo();
-    console.log(user)
+    console.log(user);
     setUserInfo(user);
   };
 
@@ -134,7 +133,7 @@ export function AuthProvider({ children }) {
       return "";
     }
     const address = await RPC.getAccounts(provider);
-    console.log(address)
+    console.log(address);
     setWalletAddress(address);
   };
 
@@ -148,7 +147,7 @@ export function AuthProvider({ children }) {
     setAccountBalance(balance);
   };
 
-  // Smart Contract Functions 
+  // Smart Contract Functions
   const getUnlockTime = async () => {
     if (!provider) {
       console.log("provider not initialized yet");
@@ -156,7 +155,7 @@ export function AuthProvider({ children }) {
     }
     const unlockTime = await RPC.getUnlockTime(provider);
     console.log(unlockTime);
-  }
+  };
 
   const withdrawMoney = async () => {
     if (!provider) {
@@ -165,23 +164,25 @@ export function AuthProvider({ children }) {
     }
     const result = await RPC.withdrawMoney(provider, publicAddress);
     console.log(result);
-  }
+  };
 
   return (
-    <AuthContext.Provider value={{
-      loggedIn,
-      login,
-      publicAddress,
-      userInfo,
-      accountBalance,
-      getUserInfo,
-      logout,
-      getAccounts,
-      getBalance,
-      // -
-      getUnlockTime,
-      withdrawMoney
-    }}>
+    <AuthContext.Provider
+      value={{
+        loggedIn,
+        login,
+        publicAddress,
+        userInfo,
+        accountBalance,
+        getUserInfo,
+        logout,
+        getAccounts,
+        getBalance,
+        // -
+        getUnlockTime,
+        withdrawMoney,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
