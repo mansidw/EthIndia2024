@@ -1,9 +1,8 @@
-import React from "react";
 import "./UserProfile.css";
 import BalanceCard from "./BalanceCard";
 import DataTiles from "./DataTiles";
 
-const UserProfile = () => {
+const UserProfile = ({ web3, accounts, contract, balance }) => {
   const data = [
     {
       vote: {
@@ -112,7 +111,7 @@ const UserProfile = () => {
   return (
     <div className="user_profile_container">
       <div className="user_generic">
-        <BalanceCard userName={"Gaurav"} balance={1000} />
+        <BalanceCard userName={accounts[0]} balance={balance} />
         <img
           className="user_profile_pic"
           src="default_profile.png"

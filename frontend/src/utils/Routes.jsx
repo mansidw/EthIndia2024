@@ -49,6 +49,7 @@ function CustomRoutes() {
   const [web3, setWeb3] = useState(undefined);
   const [accounts, setAccounts] = useState([]);
   const [contract, setContract] = useState();
+  const [balance, setBalance] = useState(0);
 
   const location = useLocation(); // Get the current location
 
@@ -64,6 +65,8 @@ function CustomRoutes() {
     // loadBlockchainData
     const tempAccounts = await tempWeb3.eth.getAccounts();
     const networkId = await tempWeb3.eth.net.getId();
+    const balanceInWei = await tempWeb3.eth.getBalance(tempAccounts[0]);
+    const balanceInEther = tempWeb3.utils.fromWei(balanceInWei, "ether");
 
     let VoteOffCon;
 
@@ -87,6 +90,7 @@ function CustomRoutes() {
       setContract(VoteOffCon);
       setWeb3(tempWeb3);
       setAccounts(tempAccounts);
+      setBalance(balanceInEther);
     }
   };
 
@@ -121,7 +125,12 @@ function CustomRoutes() {
                 <Adddata web3={web3} accounts={accounts} contract={contract} />
               }
             />
-            <Route path="/verify" element={<Verify />} />
+            <Route
+              path="/verify"
+              element={
+                <Verify web3={web3} accounts={accounts} contract={contract} />
+              }
+            />
             <Route
               path="/profile"
               element={
@@ -129,6 +138,7 @@ function CustomRoutes() {
                   web3={web3}
                   accounts={accounts}
                   contract={contract}
+                  balance={balance}
                 />
               }
             />

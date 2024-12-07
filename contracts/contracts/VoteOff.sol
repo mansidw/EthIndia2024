@@ -71,6 +71,7 @@ contract VoteOff is EIP712MetaTransaction("VoteOff", "1") {
             0,
             10
         );
+        allurlhashes.push(urlhash);
     }
 
     // vote: 1 positive, 0 negative

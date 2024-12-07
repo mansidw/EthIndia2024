@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AddData.css";
 import { ReactTinyLink } from "react-tiny-link";
+import { sha256 } from "crypto-hash";
 
 const Adddata = ({ web3, accounts, contract }) => {
   useEffect(() => {
@@ -12,9 +13,17 @@ const Adddata = ({ web3, accounts, contract }) => {
     setWebLink(e.target.value);
   };
 
-  const handleSubmit = () => {
-    alert(`Submitted: ${webLink}`);
-    // Additional logic for submitting the link can go here
+  const handleSubmit = async () => {
+    let urlHash = await sha256(webLink);
+    // let res0 = await contract.methods
+    //   .registerNewContract("0x08D2B6999a4A71052323592B615643D4240D7e79")
+    //   .send({ from: accounts[0] });
+
+    let res = await contract.methods
+      .addData(webLink, "articleData", urlHash)
+      .send({ from: accounts[0] });
+    console.log("added url data source - ", res);
+    alert(`Submitted: ${res}`);
   };
 
   return (
