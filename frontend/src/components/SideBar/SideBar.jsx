@@ -11,7 +11,7 @@ const SideBar = () => {
         <div className="side_nav">
           <div className="nav_points">
             <ul className="nav_list">
-              <Link to="">
+              <Link to="/add">
                 <li
                   className={`nav_item ${
                     currentPath === "/add" ? "active" : ""
