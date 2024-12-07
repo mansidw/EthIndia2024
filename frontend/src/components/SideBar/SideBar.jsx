@@ -13,7 +13,9 @@ const SideBar = () => {
             <ul className="nav_list">
               <Link to="">
                 <li
-                  className={`nav_item ${currentPath === "/" ? "active" : ""}`}
+                  className={`nav_item ${
+                    currentPath === "/add" ? "active" : ""
+                  }`}
                 >
                   <p>Add Data</p>
                 </li>
