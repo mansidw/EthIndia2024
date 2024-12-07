@@ -1,0 +1,84 @@
+.landing-page {
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  background: #f9f9f9;
+}
+
+.hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(to right, #fec701, #fff);
+}
+
+.hero-content {
+  max-width: 50%;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  color: #444;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  color: #555;
+}
+
+.cta-buttons {
+  margin-top: 1.5rem;
+}
+
+.cta-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #fec701;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.cta-button.outline {
+  background-color: transparent;
+  color: #fec701;
+  border: 2px solid #fec701;
+}
+
+.problem-section,
+.solution-section,
+.use-case-section {
+  padding: 2rem;
+  text-align: center;
+}
+
+.problem-list,
+.features-grid,
+.use-case-list {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.feature-card,
+.use-case-item {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 250px;
+  text-align: center;
+}
+
+.cta-section {
+  text-align: center;
+  padding: 2rem;
+  background: #fff8e1;
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  color: #444;
+}
