@@ -5,6 +5,14 @@ contract EthIndia {
     mapping(address => string) public publicAddressToAonAadhar;
     mapping(string => address) public aonAadharToPublicAddress;
 
+    address public owner;
+    uint256 public constant INITIAL_SUPPLY = 10; // 1 million tokens
+    mapping(address => bool) private hasReceivedTokens;
+
+    constructor() ERC20("EthIndia Token", "EIN") {
+        owner = msg.sender;
+    }
+
     function checkAndLinkAonAadhar(string memory _aonAadhar) public {
         require(bytes(_aonAadhar).length > 0, "AonAadhar cannot be empty");
 
@@ -28,5 +36,12 @@ contract EthIndia {
         // Link the AonAadhar to the sender's address
         aonAadharToPublicAddress[_aonAadhar] = msg.sender;
         publicAddressToAonAadhar[msg.sender] = _aonAadhar;
+    }
+
+    function claimTokens(address user) external {
+        require(!hasReceivedTokens[user], "User has already received tokens");
+
+        _mint(msg.sender, INITIAL_SUPPLY);
+        hasReceivedTokens[msg.sender] = true;
     }
 }
