@@ -42,6 +42,7 @@ const Verify = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [stake, setStake] = useState(""); // New state for stake
 
   // Fetch articles on component mount
   useEffect(() => {
@@ -64,15 +65,22 @@ const Verify = () => {
   // Handle verification (accept or decline)
   const handleVerification = async (isAccepted) => {
     if (currentIndex < articles.length) {
+      if (!stake || isNaN(stake) || stake <= 0) {
+        alert("Please enter a valid stake greater than 0.");
+        return;
+      }
+
       try {
         // Simulated API call for verification
         console.log(`Verifying article ${articles[currentIndex].id}`, {
           accepted: isAccepted,
+          stake: stake,
           url: articles[currentIndex].url,
         });
 
         // Move to next article
         setCurrentIndex((prev) => prev + 1);
+        setStake(""); // Reset stake after verification
       } catch (error) {
         console.error("Verification failed:", error);
       }
@@ -86,6 +94,7 @@ const Verify = () => {
 
       // Move to next article
       setCurrentIndex((prev) => prev + 1);
+      setStake(""); // Reset stake when skipping
     }
   };
 
@@ -164,6 +173,18 @@ const Verify = () => {
           </motion.button>
         </motion.div>
       </AnimatePresence>
+
+      {/* Stake Input */}
+      <div className="stake-input-container">
+        <label htmlFor="stake">Enter your stake:</label>
+        <input
+          id="stake"
+          type="number"
+          value={stake}
+          onChange={(e) => setStake(e.target.value)}
+          placeholder="Enter stake"
+        />
+      </div>
 
       {/* Skip Button */}
       <motion.button

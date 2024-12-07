@@ -6,12 +6,14 @@ import SideBar from "../components/SideBar/SideBar";
 import Adddata from "../components/AddData/AddData";
 import Verify from "../components/Verify/Verify";
 import LandingPage from "../components/LandingPage/LandingPage";
+import UserProfile from "../components/UserProfile/UserProfile";
 import "./Routes.css";
 
 import Web3, { ERR_INVALID_RESPONSE } from "web3";
 import VoteOff from "../contract_ref/VoteOff.json";
 // import BlockChainContext from "../context/BlockChain.jsx"
 import BlockChain from "../context/BlockChain.jsx";
+import chainData from "../contract_ref/deployed-contracts.json";
 
 const getWeb3 = async () => {
   let tempWeb3 = undefined;
@@ -72,13 +74,15 @@ function CustomRoutes() {
     window.ethereum.on("accountsChanged", listener);
 
     console.log("tempWeb3", tempWeb3);
-    console.log("tempWeb3", tempAccounts);
+    console.log("tempaccounts", tempAccounts);
     console.log("networkId", networkId);
 
-    const networkdata = VoteOff.networks[networkId];
+    const networkdata = chainData[networkId];
+    console.log("networkData", networkdata);
     if (networkdata) {
-      const abi = VoteOff.abi;
-      VoteOffCon = new tempWeb3.eth.Contract(abi, networkdata.address);
+      console.log("came indise------------");
+      const abi = VoteOff;
+      VoteOffCon = new tempWeb3.eth.Contract(abi, networkdata);
 
       setContract(VoteOffCon);
       setWeb3(tempWeb3);
@@ -121,7 +125,11 @@ function CustomRoutes() {
             <Route
               path="/profile"
               element={
-                <Profile web3={web3} accounts={accounts} contract={contract} />
+                <UserProfile
+                  web3={web3}
+                  accounts={accounts}
+                  contract={contract}
+                />
               }
             />
             <Route path="/anon" element={<Anon />} />
