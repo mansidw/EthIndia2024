@@ -19,6 +19,7 @@ contract VoteOff is EIP712MetaTransaction("VoteOff", "1") {
         uint threshold;
     }
     mapping(string => UrlInfo) public urlToData;
+    string[] public allurlhashes;
 
     struct UserVote {
         string urlhash;
@@ -138,5 +139,15 @@ contract VoteOff is EIP712MetaTransaction("VoteOff", "1") {
         }
 
         return combinedVotes;
+    }
+
+    function getAllArticles() public view returns (UrlInfo[] memory) {
+        UrlInfo[] memory allUrls = new UrlInfo[](allurlhashes.length);
+
+        for (uint i = 0; i < allurlhashes.length; i++) {
+            allUrls[i] = urlToData[allurlhashes[i]];
+        }
+
+        return allUrls;
     }
 }
