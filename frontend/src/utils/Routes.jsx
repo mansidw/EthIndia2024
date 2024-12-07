@@ -6,6 +6,7 @@ import SideBar from "../components/SideBar/SideBar";
 import Adddata from "../components/AddData/AddData";
 import Verify from "../components/Verify/Verify";
 import LandingPage from "../components/LandingPage/LandingPage";
+import UserProfile from "../components/UserProfile/UserProfile";
 import "./Routes.css";
 
 function CustomRoutes() {
@@ -30,7 +31,7 @@ function CustomRoutes() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/add" element={<Adddata />} />
           <Route path="/verify" element={<Verify />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="/anon" element={<Anon />} />
         </Routes>
       </div>

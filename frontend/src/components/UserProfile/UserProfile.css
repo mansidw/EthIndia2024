@@ -1,0 +1,146 @@
+.user_generic {
+  display: flex;
+  flex-direction: row;
+}
+
+.user_profile_pic {
+  width: 250px;
+}
+
+.user_profile_container {
+  width: 100vw;
+  margin-top: 50px;
+}
+
+.user_generic {
+  justify-content: space-around;
+}
+
+.credit-card {
+  width: 340px;
+  height: 200px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #5a1eae, #8146d8);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5),
+    inset -2px -2px 8px rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-family: "Arial", sans-serif;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glossy Effect */
+.credit-card::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 400px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.2);
+  filter: blur(80px);
+  transform: rotate(-20deg);
+  z-index: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.card-chip {
+  width: 40px;
+  height: 30px;
+  background: linear-gradient(45deg, #bcbcbc, #e0e0e0);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-bank {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.card-body {
+  z-index: 2;
+}
+
+.card-balance {
+  margin-bottom: 20px;
+}
+
+.card-balance p {
+  font-size: 12px;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.card-balance h2 {
+  font-size: 42px;
+  font-weight: bolder;
+  margin: 0;
+  color: white;
+  margin-bottom: 35px;
+}
+
+.card-user {
+  font-size: 16px;
+  /* font-weight: bold; */
+}
+
+.card-number,
+.card-expiry {
+  letter-spacing: 1px;
+}
+
+.data_tile {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.data_info {
+  margin-top: 8px;
+}
+
+.data_info p {
+  font-size: 14px;
+}
+
+.data_info span {
+  font-weight: bold;
+}
+/* 
+.data_link {
+  width: 50%;
+} */
+
+.data_tile a {
+  width: 700px !important;
+}
+
+.data_info,
+.user_data_stake {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user_data_summary {
+  font-weight: bold;
+  font-size: 28px;
+}
