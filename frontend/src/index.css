@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
 }
 
 code {
@@ -16,9 +17,8 @@ code {
   display: none;
 }
 
-
 /* Infinte roll */
-.infinite-rotate{
+.infinite-rotate {
   animation: rotation 3s infinite linear;
 }
 

@@ -1,0 +1,12 @@
+.route_container {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.right_container {
+  width: 85vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
