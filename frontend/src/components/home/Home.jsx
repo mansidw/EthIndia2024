@@ -1,16 +1,11 @@
-import React from 'react'
-import { useAuth } from '../../context/AuthContext';
-import { Button } from 'react-bootstrap';
+import React from "react";
+import { useAuth } from "../../context/AuthContext";
+import { Button } from "react-bootstrap";
+import SideBar from "../SideBar/SideBar";
 
 function Home() {
-    const { getUnlockTime, withdrawMoney } = useAuth();
-    return (
-        <div>
-            <Button onClick={getUnlockTime}>GetTime</Button>
-            <Button onClick={withdrawMoney}>WithDraw</Button>
-            <div>Home</div>
-        </div>
-    )
+  const { getUnlockTime, withdrawMoney } = useAuth();
+  return <div>Helllo</div>;
 }
 
-export default Home
+export default Home;
