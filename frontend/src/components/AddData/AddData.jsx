@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddData.css";
 import { ReactTinyLink } from "react-tiny-link";
 
-const Adddata = () => {
+const Adddata = ({ web3, accounts, contract }) => {
+  useEffect(() => {
+    console.log("inside the add dtaa page - ", accounts);
+  }, []);
   const [webLink, setWebLink] = useState("");
 
   const handleInputChange = (e) => {
