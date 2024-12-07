@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChatGPT Verification</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      width: 400px;
+      background-color: #1a1a2e;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+    }
+    .gradient-border {
+      border: 2px solid transparent;
+      border-image: linear-gradient(to right, #4a90e2, #50c878);
+      border-image-slice: 1;
+    }
+    .source-type-Verified {
+      background: rgba(80, 200, 120, 0.1);
+      border-left: 4px solid #50c878;
+    }
+    .source-type-Partially-Verified {
+      background: rgba(255, 165, 0, 0.1);
+      border-left: 4px solid #ffa500;
+    }
+    .source-type-Unknown {
+      background: rgba(128, 128, 128, 0.1);
+      border-left: 4px solid #808080;
+    }
+    .scrollbar-custom::-webkit-scrollbar {
+      width: 8px;
+    }
+    .scrollbar-custom::-webkit-scrollbar-track {
+      background: #2c2c3e;
+    }
+    .scrollbar-custom::-webkit-scrollbar-thumb {
+      background: #4a90e2;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="p-4 rounded-lg shadow-2xl">
+  <div class="container mx-auto">
+    <div class="mb-4 text-center">
+      <h1 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500">
+        Verification Insights
+      </h1>
+    </div>
+
+    <div id="verification-summary" class="bg-gray-800 p-4 rounded-lg mb-4 gradient-border">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="text-sm text-gray-400">Total Sources</p>
+          <p id="total-sources" class="text-xl font-bold text-blue-400">-</p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-400">Verified Percentage</p>
+          <p id="verified-percentage" class="text-xl font-bold text-green-400">-</p>
+        </div>
+      </div>
+      <div class="mt-4">
+        <div class="w-full bg-gray-700 rounded-full h-2.5">
+          <div id="verification-progress" class="bg-gradient-to-r from-blue-500 to-green-500 h-2.5 rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <h3 class="text-lg font-semibold mb-2 text-gray-200">Detailed Sources</h3>
+      <div id="source-list" class="max-h-64 overflow-y-auto scrollbar-custom space-y-2">
+        <!-- Sources will be dynamically added here -->
+      </div>
+    </div>
+
+    <div id="no-data" class="hidden text-center bg-gray-800 p-4 rounded-lg">
+      <p class="text-gray-400">No verification data available</p>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
