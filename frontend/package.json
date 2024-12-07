@@ -12,9 +12,11 @@
   },
   "//IMP START": "IMP START - Web3Auth Installation",
   "dependencies": {
+    "@anon-aadhaar/react": "^2.4.2",
     "@coinbase/cdp-agentkit-core": "^0.0.7",
     "@coinbase/cdp-langchain": "^0.0.8",
-    "@anon-aadhaar/react": "^2.4.2",
+    "@dhaiwat10/react-link-preview": "^1.15.0",
+    "@fortawesome/fontawesome-svg-core": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@langchain/core": "^0.3.22",
@@ -33,6 +35,7 @@
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
+    "react-tiny-link": "^3.6.1",
     "react-toastify": "^10.0.5",
     "viem": "^2.19.1",
     "web3": "^4.11.1"

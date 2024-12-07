@@ -1,0 +1,138 @@
+.side_nav_container {
+  width: 15vw;
+  background-color: white !important;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  height: 90vh;
+  overflow-x: scroll;
+}
+
+.side_nav_container::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar_logo {
+  width: 100%;
+}
+
+.side_nav {
+  padding: 10% 5%;
+}
+
+.side_nav a {
+  text-decoration: none;
+  color: black;
+}
+
+.side_nav a:active {
+  background-color: #fec701;
+}
+
+.sidebar_logo {
+  width: 100%;
+}
+
+.side_nav {
+  padding: 5% 5%;
+}
+
+.side_nav a {
+  text-decoration: none;
+  color: black;
+}
+
+.side_nav a:active {
+  background-color: #fec701;
+}
+
+.nav_list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav_item {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: left; */
+  align-items: center;
+  padding-left: 10px;
+  margin: 0 !important;
+}
+
+.nav_item > p {
+  margin: 0 !important;
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.nav_item.active {
+  background-color: #fec701;
+  border-radius: 10px;
+  color: white;
+}
+
+.nav_item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.nav_points {
+  padding-top: 20px;
+}
+
+.coderbandhu {
+  width: 80%;
+}
+
+.top_nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.hamburger {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+}
+
+/* Common css for mobile and tab */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .side_nav_container {
+    width: 70vw;
+  }
+
+  .side_nav_container {
+    width: 60vw;
+    background-color: white !important;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  .side_nav_container.open {
+    transform: translateX(0);
+  }
+
+  .side_nav_container {
+    transform: translateX(-100%);
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .side_nav_container {
+    width: 30%;
+  }
+}
