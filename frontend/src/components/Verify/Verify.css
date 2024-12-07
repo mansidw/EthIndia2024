@@ -83,3 +83,20 @@
   color: #6b7280; /* Gray */
   text-align: center;
 }
+
+.stake-input-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stake-input-container label {
+  margin-bottom: 5px;
+}
+
+.stake-input-container input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
