@@ -4,15 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, SkipForward } from "lucide-react";
 import "./Verify.css";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
 
-// Simulated API data fetch (replace with actual API call)
-const fetchArticles = async (contract) => {
-  let resp = await contract.methods.getAllArticles().call();
-  return resp;
-};
 
 const Verify = ({ web3, accounts, contract }) => {
-  const [articles, setArticles] = useState([]);
+  const { articles, getAllArticles, addUserVote } = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,24 +16,18 @@ const Verify = ({ web3, accounts, contract }) => {
 
   // Fetch articles on component mount
   useEffect(() => {
-    const loadArticles = async () => {
-      try {
-        setIsLoading(true);
-        const fetchedArticles = await fetchArticles(contract);
-        setArticles(fetchedArticles);
-      } catch (err) {
-        setError(err);
-        console.error("Failed to fetch articles:", err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    try {
 
-    loadArticles();
+      getAllArticles()
+    } finally {
+      setIsLoading(false)
+    }
   }, []);
 
   // Handle verification (accept or decline)
-  const handleVerification = async (isAccepted) => {
+  const handleVerification = async (isAccepted, urlHash) => {
+    console.log(urlHash)
+    console.log("url hash")
     if (currentIndex < articles.length) {
       if (!stake || isNaN(stake) || stake <= 0) {
         alert("Please enter a valid stake greater than 0.");
@@ -45,24 +35,8 @@ const Verify = ({ web3, accounts, contract }) => {
       }
 
       try {
-        // Simulated API call for verification
-        // checking if the user is logged in via anon aadhar
-        let aadharVerified = await contract.methods
-          .checkIfAlreadyRegistered()
-          .call();
-        console.log("aadhar verified - ", aadharVerified);
-        if (!aadharVerified) {
-          toast.warning("Connect your Aadhar 😒");
-        }
-        console.log(`Verifying article ${articles[currentIndex].id}`, {
-          accepted: isAccepted,
-          stake: stake,
-          url: articles[currentIndex].url,
-        });
 
-        let resp = await contract.methods
-          .addUserVote(urlHash, isAccepted == true ? 1 : 0, stake)
-          .send({ from: accounts[0] });
+        await addUserVote(urlHash, isAccepted == true ? 1 : 0, stake);
 
         toast.success("Successfully added your vote!");
 
@@ -116,7 +90,7 @@ const Verify = ({ web3, accounts, contract }) => {
   }
 
   const currentArticle = articles[currentIndex];
-
+  console.log(currentArticle);
   return (
     <div className="verify-container">
       <AnimatePresence>

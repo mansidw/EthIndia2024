@@ -28,12 +28,23 @@ const clientId = import.meta.env.VITE_SOME_KEY;
 //   tickerName: "Ethereum",
 //   logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
 // };
+// const chainConfig = {
+//   chainNamespace: CHAIN_NAMESPACES.EIP155,
+//   chainId: "0x7a69", // Hardhat local network chainId in hexadecimal
+//   rpcTarget: "http://localhost:8545", // Local Hardhat network RPC URL
+//   displayName: "Hardhat Local Network",
+//   blockExplorerUrl: "", // Local network does not have a block explorer
+//   ticker: "ETH",
+//   tickerName: "Ethereum",
+//   logo: "", // Local network typically does not have a logo
+// };
+
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0x7a69", // Hardhat local network chainId in hexadecimal
-  rpcTarget: "http://localhost:8545", // Local Hardhat network RPC URL
-  displayName: "Hardhat Local Network",
-  blockExplorerUrl: "", // Local network does not have a block explorer
+  chainId: "0x98a", // Hardhat local network chainId in hexadecimal
+  rpcTarget: "https://rpc.cardona.zkevm-rpc.com", // Local Hardhat network RPC URL
+  displayName: "Polygon zkEVM Cardona",
+  blockExplorerUrl: "https://cardona-zkevm.polygonscan.com/", // Local network does not have a block explorer
   ticker: "ETH",
   tickerName: "Ethereum",
   logo: "", // Local network typically does not have a logo
@@ -56,6 +67,8 @@ export function AuthProvider({ children }) {
   const [publicAddress, setWalletAddress] = useState("");
   const [userInfo, setUserInfo] = useState({});
   const [accountBalance, setAccountBalance] = useState(0);
+
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     const init = async () => {
@@ -166,6 +179,44 @@ export function AuthProvider({ children }) {
     console.log(result);
   };
 
+  const addData = async (url, urlhash, data) => {
+    if (!provider) {
+      console.log("provider not initialized yet");
+      return;
+    }
+    return await RPC.addData(
+      provider,
+      url,
+      urlhash,
+      data,
+      publicAddress
+    );
+  }
+  const getAllArticles = async () => {
+    if (!provider) {
+      console.log("provider not initialized yet");
+      return;
+    }
+
+    const res = await RPC.getAllArticles(
+      provider
+    );
+    setArticles(res);
+  }
+
+  const addUserVote = async (urlhash, vote, stakeamt) => {
+    if (!provider) {
+      console.log("provider not initialized yet");
+      return;
+    }
+    return await RPC.addUserVote(
+      provider,
+      urlhash,
+      vote,
+      stakeamt,
+      publicAddress
+    );
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -178,9 +229,13 @@ export function AuthProvider({ children }) {
         logout,
         getAccounts,
         getBalance,
+        articles,
         // -
         getUnlockTime,
         withdrawMoney,
+        addData,
+        getAllArticles,
+        addUserVote
       }}
     >
       {children}

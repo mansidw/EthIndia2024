@@ -3,8 +3,11 @@ import "./AddData.css";
 import { ReactTinyLink } from "react-tiny-link";
 import { sha256 } from "crypto-hash";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
 
 const Adddata = ({ web3, accounts, contract }) => {
+
+  const { addData } = useAuth();
   useEffect(() => {
     console.log("inside the add dtaa page - ", accounts);
   }, []);
@@ -20,9 +23,11 @@ const Adddata = ({ web3, accounts, contract }) => {
     //   .registerNewContract("0x08D2B6999a4A71052323592B615643D4240D7e79")
     //   .send({ from: accounts[0] });
 
-    let res = await contract.methods
-      .addData(webLink, "articleData", urlHash)
-      .send({ from: accounts[0] });
+    // let res = await contract.methods
+    //   .addData(webLink, "articleData", urlHash)
+    //   .send({ from: accounts[0] });
+
+    await addData(webLink, urlHash, "articleData");
     console.log("added url data source - ", res);
     toast.success("Added URL!");
   };
