@@ -30,7 +30,7 @@ function PageNavbar() {
               src={PAGE_LOGO}
               width="30"
               height="30"
-              className="d-inline-block align-top mx-2 rounded-circle infinite-rotate"
+              className="d-inline-block align-top mx-2 rounded-circle"
             />
             {PAGE_TITLE}
           </Navbar.Brand>
