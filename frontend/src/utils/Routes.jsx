@@ -11,6 +11,7 @@ import "./Routes.css";
 
 import Web3, { ERR_INVALID_RESPONSE } from "web3";
 import VoteOff from "../contract_ref/VoteOff.json";
+import VoteToken from "../contract_ref/VoteToken.json";
 // import BlockChainContext from "../context/BlockChain.jsx"
 import BlockChain from "../context/BlockChain.jsx";
 import chainData from "../contract_ref/deployed-contracts.json";
@@ -65,10 +66,9 @@ function CustomRoutes() {
     // loadBlockchainData
     const tempAccounts = await tempWeb3.eth.getAccounts();
     const networkId = await tempWeb3.eth.net.getId();
-    const balanceInWei = await tempWeb3.eth.getBalance(tempAccounts[0]);
-    const balanceInEther = tempWeb3.utils.fromWei(balanceInWei, "ether");
 
     let VoteOffCon;
+    let VoteTokenCon;
 
     const listener = (accs) => {
       setAccounts(accs);
@@ -80,12 +80,23 @@ function CustomRoutes() {
     console.log("tempaccounts", tempAccounts);
     console.log("networkId", networkId);
 
-    const networkdata = chainData[networkId];
+    const networkdata = chainData[networkId][0];
+    const voteTokenNetworkData = chainData[networkId][1];
+
     console.log("networkData", networkdata);
     if (networkdata) {
       console.log("came indise------------");
-      const abi = VoteOff;
+      let abi = VoteOff;
       VoteOffCon = new tempWeb3.eth.Contract(abi, networkdata);
+
+      abi = VoteToken;
+      VoteTokenCon = new tempWeb3.eth.Contract(abi, voteTokenNetworkData);
+
+      let balanceInEther = await VoteTokenCon.methods
+        .balanceOf(tempAccounts[0])
+        .call();
+
+      console.log("balane coming - ", balanceInEther);
 
       setContract(VoteOffCon);
       setWeb3(tempWeb3);

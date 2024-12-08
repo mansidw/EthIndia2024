@@ -3,41 +3,15 @@ import { ReactTinyLink } from "react-tiny-link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, SkipForward } from "lucide-react";
 import "./Verify.css";
+import { toast } from "react-toastify";
 
 // Simulated API data fetch (replace with actual API call)
-const fetchArticles = () => {
-  return new Promise((resolve) => {
-    const dummyArticles = [
-      {
-        id: 1,
-        url: "https://techcrunch.com/2024/01/15/ai-revolutionizes-tech-industry",
-        hash: "tech_article_1",
-      },
-      {
-        id: 2,
-        url: "https://www.wired.com/story/future-of-machine-learning",
-        hash: "tech_article_2",
-      },
-      {
-        id: 3,
-        url: "https://venturebeat.com/ai/breakthrough-in-neural-networks",
-        hash: "tech_article_3",
-      },
-      {
-        id: 4,
-        url: "https://techradar.com/latest-innovation-trends",
-        hash: "tech_article_4",
-      },
-    ];
-
-    // Simulate network delay
-    setTimeout(() => {
-      resolve(dummyArticles);
-    }, 1000);
-  });
+const fetchArticles = async (contract) => {
+  let resp = await contract.methods.getAllArticles().call();
+  return resp;
 };
 
-const Verify = () => {
+const Verify = ({ web3, accounts, contract }) => {
   const [articles, setArticles] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,7 +23,7 @@ const Verify = () => {
     const loadArticles = async () => {
       try {
         setIsLoading(true);
-        const fetchedArticles = await fetchArticles();
+        const fetchedArticles = await fetchArticles(contract);
         setArticles(fetchedArticles);
       } catch (err) {
         setError(err);
@@ -72,11 +46,25 @@ const Verify = () => {
 
       try {
         // Simulated API call for verification
+        // checking if the user is logged in via anon aadhar
+        let aadharVerified = await contract.methods
+          .checkIfAlreadyRegistered()
+          .call();
+        console.log("aadhar verified - ", aadharVerified);
+        if (!aadharVerified) {
+          toast.warning("Connect your Aadhar 😒");
+        }
         console.log(`Verifying article ${articles[currentIndex].id}`, {
           accepted: isAccepted,
           stake: stake,
           url: articles[currentIndex].url,
         });
+
+        let resp = await contract.methods
+          .addUserVote(urlHash, isAccepted == true ? 1 : 0, stake)
+          .send({ from: accounts[0] });
+
+        toast.success("Successfully added your vote!");
 
         // Move to next article
         setCurrentIndex((prev) => prev + 1);
@@ -144,7 +132,7 @@ const Verify = () => {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => handleVerification(false)}
+            onClick={() => handleVerification(false, currentArticle.urlhash)}
             className="decline-button"
           >
             <X size={24} />
@@ -166,7 +154,7 @@ const Verify = () => {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => handleVerification(true)}
+            onClick={() => handleVerification(true, currentArticle.urlhash)}
             className="accept-button"
           >
             <Check size={24} />

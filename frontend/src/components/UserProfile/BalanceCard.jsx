@@ -12,7 +12,7 @@ const BalanceCard = ({ userName, balance }) => {
         <div className="card-balance">
           <p>Balance</p>
           <h2 className="total_balance">
-            {balance.toLocaleString().slice(0, 6)} ETH
+            {balance.toLocaleString().slice(0, 6)} VoteToken
           </h2>
         </div>
         <div className="card-user">

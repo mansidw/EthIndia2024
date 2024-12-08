@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./AddData.css";
 import { ReactTinyLink } from "react-tiny-link";
 import { sha256 } from "crypto-hash";
+import { toast } from "react-toastify";
 
 const Adddata = ({ web3, accounts, contract }) => {
   useEffect(() => {
@@ -23,7 +24,7 @@ const Adddata = ({ web3, accounts, contract }) => {
       .addData(webLink, "articleData", urlHash)
       .send({ from: accounts[0] });
     console.log("added url data source - ", res);
-    alert(`Submitted: ${res}`);
+    toast.success("Added URL!");
   };
 
   return (
