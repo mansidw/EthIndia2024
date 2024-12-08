@@ -1,8 +1,21 @@
 import "./UserProfile.css";
 import BalanceCard from "./BalanceCard";
 import DataTiles from "./DataTiles";
+import { useAuth } from "../../context/AuthContext";
+import { useEffect, useState } from "react";
 
 const UserProfile = ({ web3, accounts, contract, balance }) => {
+
+  const { votes, publicAddress, getAllVotes } = useAuth();
+
+  const [newVotes, setNewVotes] = useState();
+  useEffect(() => {
+    if (votes)
+      setNewVotes(votes.filter((votedata) => votedata.vote.sender == publicAddress));
+  }, [votes]);
+  useEffect(() => {
+    getAllVotes()
+  }, []);
   const data = [
     {
       vote: {
@@ -107,7 +120,9 @@ const UserProfile = ({ web3, accounts, contract, balance }) => {
       },
     },
   ];
-
+  console.log(newVotes);
+  console.log(publicAddress);
+  console.log(votes)
   return (
     <div className="user_profile_container">
       <div className="user_generic">
@@ -119,7 +134,7 @@ const UserProfile = ({ web3, accounts, contract, balance }) => {
         />
       </div>
       <div className="user_data_tile">
-        <DataTiles data={data} />
+        <DataTiles data={newVotes} />
       </div>
     </div>
   );

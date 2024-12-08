@@ -38,7 +38,7 @@ const DataTiles = ({ data }) => {
 
   return (
     <div>
-      {data.map((item, index) => {
+      {data?.map((item, index) => {
         const { vote, info } = item;
         const { summary, status } = calculateSummary(vote, info);
         const summaryStyle =
@@ -52,11 +52,11 @@ const DataTiles = ({ data }) => {
               maxLine={1}
               url={info.url}
               className="data_link"
-              //   width={1000}
+            //   width={1000}
             />
             <div className="user_data_stake">
               <p>Stake amount:</p>
-              <p>{vote.stakeamt}</p>
+              <p>{vote.stakeamt.toString()}</p>
             </div>
             <div className="data_info">
               <p>Status: {status}</p>

@@ -69,6 +69,7 @@ export function AuthProvider({ children }) {
   const [accountBalance, setAccountBalance] = useState(0);
 
   const [articles, setArticles] = useState([]);
+  const [votes, setVotes] = useState([]);
 
   useEffect(() => {
     const init = async () => {
@@ -217,6 +218,18 @@ export function AuthProvider({ children }) {
       publicAddress
     );
   }
+
+  const getAllVotes = async () => {
+    if (!provider) {
+      console.log("provider not initialized yet");
+      return;
+    }
+
+    const res = await RPC.getAllVotes(
+      provider
+    );
+    setVotes(res);
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -230,12 +243,14 @@ export function AuthProvider({ children }) {
         getAccounts,
         getBalance,
         articles,
+        votes,
         // -
         getUnlockTime,
         withdrawMoney,
         addData,
         getAllArticles,
-        addUserVote
+        addUserVote,
+        getAllVotes
       }}
     >
       {children}

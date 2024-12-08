@@ -14,7 +14,7 @@ const getViewChain = (provider: IProvider) => {
 
   console.log("joyjoyjoy")
   console.log(provider.chainId);
-  
+
   switch (provider.chainId) {
     case "1":
       return mainnet;
@@ -312,6 +312,28 @@ const addUserVote = async (
   }
 };
 
+const getAllVotes = async (provider: IProvider) => {
+  try {
+    const publicClient = createPublicClient({
+      chain: getViewChain(provider),
+      transport: custom(provider),
+    });
+    const chainId = await getChainId(provider);
+    let voteDetails = await publicClient.readContract({
+      abi: abi,
+      // @ts-ignore
+      address: `${contractAddresses[chainId]}`,
+      functionName: "getAllVotes",
+    });
+
+    return voteDetails;
+  } catch (error) {
+    console.log("Something went wrong");
+    console.log(error);
+    return "error";
+  }
+};
+
 export default {
   getChainId,
   getAccounts,
@@ -323,4 +345,5 @@ export default {
   addData,
   getAllArticles,
   addUserVote,
+  getAllVotes
 };
